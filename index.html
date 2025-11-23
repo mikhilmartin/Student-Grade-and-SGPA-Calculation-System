@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+        h1 { text-align: center; color: #333; }
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .info-row, .subject-row {
+            display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;
+        }
+        input, select {
+            padding: 8px; border: 1px solid #ddd; border-radius: 4px;
+        }
+        input[type="text"] { flex: 2; }
+        input[type="number"], select { flex: 1; }
+        button {
+            width: 100%; padding: 12px; background: #007bff;
+            color: white; border: none; border-radius: 4px;
+            cursor: pointer; font-size: 16px; margin-top: 10px;
+        }
+        button:hover { background: #0056b3; }
+        .add-btn { background: #28a745; }
+        .add-btn:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <h1>SGPA Calculator</h1>
+
+    <form method="POST" action="/calculate">
+        <div class="info-row">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="rollno" placeholder="Roll Number" required>
+        </div>
+        <div class="info-row">
+            <input type="text" name="department" placeholder="Department" required>
+            <input type="text" name="semester" placeholder="Semester" required>
+        </div>
+
+        <div id="subjects-container">
+            <div class="subject-row">
+                <input type="text" name="subject" placeholder="Subject Name" required>
+                <input type="number" name="credit" placeholder="Credits" min="1" required>
+                <select name="grade" required>
+                    <option value="">Grade</option>
+                    <option value="O">O (10)</option>
+                    <option value="A+">A+ (9)</option>
+                    <option value="A">A (8)</option>
+                    <option value="B+">B+ (7)</option>
+                    <option value="B">B (6)</option>
+                    <option value="C">C (5)</option>
+                    <option value="F">F (0)</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="button" class="add-btn" onclick="addSubject()">+ Add Subject</button>
+        <button type="submit">Calculate SGPA</button>
+    </form>
+
+    <script>
+        function addSubject() {
+            const container = document.getElementById('subjects-container');
+            const newRow = document.createElement('div');
+            newRow.className = 'subject-row';
+            newRow.innerHTML = `
+                <input type="text" name="subject" placeholder="Subject Name" required>
+                <input type="number" name="credit" placeholder="Credits" min="1" required>
+                <select name="grade" required>
+                    <option value="">Grade</option>
+                    <option value="O">O (10)</option>
+                    <option value="A+">A+ (9)</option>
+                    <option value="A">A (8)</option>
+                    <option value="B+">B+ (7)</option>
+                    <option value="B">B (6)</option>
+                    <option value="C">C (5)</option>
+                    <option value="F">F (0)</option>
+                </select>
+            `;
+            container.appendChild(newRow);
+        }
+    </script>
+</body>
+</html>
